@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkED Summer Camps 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2ea363;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #444444;
+            --white: #ffffff;
+            --black: #202020;
+            --border-radius: 8px;
+            --card-radius: 10px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .register-btn {
+            background-color: var(--primary-green);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .register-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Title and Filter Section */
+        .title-section {
+            margin: 20px 0 30px;
+        }
+
+        .title-section h1 {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background-color: var(--light-gray);
+            border: 1px solid var(--medium-gray);
+            border-radius: var(--border-radius);
+            padding: 10px 15px;
+            min-width: 120px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-btn:after {
+            content: "▼";
+            font-size: 10px;
+            margin-left: 10px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+            border-radius: var(--border-radius);
+            z-index: 10;
+            margin-top: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .dropdown-content a {
+            color: var(--black);
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--light-gray);
+        }
+
+        .show {
+            display: block;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 300px;
+            margin-left: auto;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--medium-gray);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+        }
+
+        /* Programs Grid */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .program-card {
+            background-color: var(--white);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .program-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .program-info {
+            padding: 15px;
+        }
+
+        .program-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .program-date {
+            font-size: 14px;
+            color: var(--dark-gray);
+            margin-bottom: 10px;
+        }
+
+        .days-list {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .day-badge {
+            background-color: var(--primary-green);
+            color: var(--white);
+            font-size: 12px;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* Program Detail Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal {
+            background-color: var(--white);
+            border-radius: var(--card-radius);
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow: hidden;
+            margin: auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 20;
+            color: var(--dark-gray);
+            background: var(--white);
+            border: none;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content {
+            display: flex;
+            height: 90vh;
+            overflow: hidden;
+        }
+
+        .program-list {
+            width: 30%;
+            min-width: 300px;
+            border-right: 1px solid var(--medium-gray);
+            height: 100%;
+            overflow-y: auto;
+            background-color: var(--light-gray);
+        }
+
+        .program-list-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 15px;
+            border-bottom: 1px solid var(--medium-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            background-color: var(--white);
+            margin: 5px;
+            border-radius: var(--border-radius);
+        }
+
+        .program-list-item:hover {
+            background-color: var(--light-gray);
+            transform: translateX(2px);
+        }
+
+        .program-list-item.active {
+            background-color: var(--primary-green);
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .program-list-info {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .program-list-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.4;
+            overflow: visible;
+            white-space: normal;
+        }
+
+        .program-detail {
+            flex-grow: 1;
+            padding: 30px 40px;
+            overflow-y: auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--white);
+        }
+
+        .program-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .program-header-logo {
+            width: 120px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .program-header-title {
+            flex-grow: 1;
+        }
+
+        .program-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 5px;
+        }
+
+        .program-subtitle {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .program-description {
+            margin-bottom: 30px;
+            line-height: 1.7;
+            font-size: 16px;
+            color: var(--dark-gray);
+        }
+
+        .program-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-group {
+            margin-bottom: 10px;
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+
+        .info-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--dark-gray);
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 220px;
+            border-radius: var(--border-radius);
+            object-fit: cover;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.02);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-green);
+            color: var(--primary-green);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            background-color: rgba(46, 163, 99, 0.1);
+        }
+
+        .google-form-btn {
+            background-color: var(--primary-green);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            margin-top: 25px;
+            font-weight: 600;
+            border: none;
+            max-width: 400px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .google-form-btn:hover {
+            background-color: #268a53;
+        }
+
+        .mobile-search {
+            display: none;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .mobile-search input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--medium-gray);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 900px) {
+            .modal-content {
+                flex-direction: column;
+                height: auto;
+                max-height: 90vh;
+            }
+
+            .program-list {
+                width: 100%;
+                min-width: auto;
+                max-height: 35vh;
+                border-right: none;
+                border-bottom: 1px solid var(--medium-gray);
+            }
+            
+            .program-detail {
+                height: auto;
+                max-height: 55vh;
+                padding: 20px;
+            }
+            
+            .program-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .program-header-logo {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
+            
+            .program-info-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-image {
+                height: 180px;
+            }
+            
+            .google-form-btn {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .filters {
+                justify-content: space-between;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .mobile-search {
+                display: block;
+            }
+
+            .programs-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+
+            .filter-dropdown {
+                flex-grow: 1;
+            }
+
+            .dropdown-btn {
+                width: 100%;
+            }
+            
+            /* Hide program list on mobile */
+            .program-list {
+                display: none;
+            }
+            
+            /* Adjust modal for mobile without sidebar */
+            .modal-content {
+                flex-direction: column;
+            }
+            
+            .program-detail {
+                padding: 15px;
+                max-height: 85vh;
+            }
+            
+            .program-header-logo {
+                width: 100px;
+            }
+            
+            .program-header h2 {
+                font-size: 18px;
+            }
+            
+            .program-subtitle {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            
+            .program-description {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+            
+            .info-group {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .title-section h1 {
+                font-size: 24px;
+            }
+
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="WorkED Logo">
+            </div>
+            <button class="register-btn" onclick="openRegistrationForm()">Google Form Link</button>
+        </header>
+
+        <div class="title-section">
+            <h1>Summer Camps 2025</h1>
+            <div class="filters">
+                <div class="filter-dropdown">
+                    <button class="dropdown-btn" onclick="toggleDropdown('session-dropdown')">Session</button>
+                    <div id="session-dropdown" class="dropdown-content">
+                        <a href="#" onclick="applyFilter('session', 'all')">All Sessions</a>
+                        <a href="#" onclick="applyFilter('session', 'Session 1')">Session 1</a>
+                        <a href="#" onclick="applyFilter('session', 'Session 2')">Session 2</a>
+                        <a href="#" onclick="applyFilter('session', 'Session 3')">Session 3</a>
+                    </div>
+                </div>
+                <div class="filter-dropdown">
+                    <button class="dropdown-btn" onclick="toggleDropdown('grade-dropdown')">Grade</button>
+                    <div id="grade-dropdown" class="dropdown-content">
+                        <a href="#" onclick="applyFilter('grade', 'all')">All Grades</a>
+                        <a href="#" onclick="applyFilter('grade', 'TK-2')">TK-2</a>
+                        <a href="#" onclick="applyFilter('grade', '3-5')">3-5</a>
+                        <a href="#" onclick="applyFilter('grade', '3-8')">3-8</a>
+                    </div>
+                </div>
+                <div class="filter-dropdown">
+                    <button class="dropdown-btn" onclick="toggleDropdown('subject-dropdown')">Subject</button>
+                    <div id="subject-dropdown" class="dropdown-content">
+                        <a href="#" onclick="applyFilter('subject', 'all')">All Subjects</a>
+                        <a href="#" onclick="applyFilter('subject', 'Imagination Station')">Imagination Station</a>
+                        <a href="#" onclick="applyFilter('subject', 'Video Game Design')">Video Game Design</a>
+                        <a href="#" onclick="applyFilter('subject', 'Dance')">Dance</a>
+                    </div>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search Bar" id="search-input" oninput="filterPrograms()">
+                </div>
+            </div>
+            <div class="mobile-search">
+                <input type="text" placeholder="Search program name" id="mobile-search-input" oninput="filterPrograms()">
+            </div>
+        </div>
+
+        <div class="programs-grid" id="programs-grid">
+            <!-- Program cards will be dynamically generated here -->
+        </div>
+    </div>
+
+    <!-- Program Detail Modal -->
+    <div class="modal-overlay" id="program-modal">
+        <div class="modal">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div class="modal-content">
+                <div class="program-list" id="modal-program-list">
+                    <!-- Program list items will be dynamically generated here -->
+                </div>
+                <div class="program-detail" id="program-detail">
+                    <!-- Program details will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Program data
+        const programs = [
+            {
+                id: 1,
+                title: "Imagination Station - Critter Care",
+                startDate: "Jul 14, 2025",
+                endDate: "Jul 18, 2025",
+                session: "Session 1",
+                days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                grade: "TK-2",
+                subject: "Imagination Station",
+                image: "critter-care.jpg",
+                descTitle: "Critter Care",
+                description: "A fun and engaging program where young learners explore animal care through hands-on adventures. From running a Reptile Zoo and Farm to helping animals in a Marine Hospital, Wildlife Center, and Pet Clinic, students step into the world of caretakers and veterinarians—learning through play, imagination, and creativity.",
+                galleryImages: ["critter-care-detail-1.jpg", "critter-care-detail-2.jpg"]
+            },
+            {
+                id: 2,
+                title: "Video Game Design - Arcade Architects",
+                startDate: "Jul 14, 2025",
+                endDate: "Jul 18, 2025",
+                session: "Session 1",
+                days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                grade: "3-8",
+                subject: "Video Game Design",
+                image: "video-game-detail-2.jpg",
+                descTitle: "Arcade Architects",
+                description: "Get ready to unleash your creativity! This summer, students will use Bloxels to design their very own indie game and launch a game studio. After bringing their ideas to life, we'll turn up the fun with an arcade-style showcase where everyone gets to play and experience each other's games!",
+                galleryImages: ["video-game-detail-1.jpg", "video-game-design-2.jpg"]
+            },
+            {
+                id: 3,
+                title: "Dance - Hip Hop & Jazz",
+                startDate: "Jul 14, 2025",
+                endDate: "Jul 18, 2025",
+                session: "Session 1",
+                days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                grade: "3-5",
+                subject: "Dance",
+                image: "dance-hiphop.jpg",
+                descTitle: "Shine on and off the stage",
+                description: "Our dance program isn't just about teaching steps—it's about giving students the tools to express themselves confidently, connect with others, and thrive in every aspect of their lives.",
+                galleryImages: ["dance-detail-1.jpg", "dance-detail-2.jpg"]
+            },
+            {
+                id: 4,
+                title: "Imagination Station - Community Heroes",
+                startDate: "Jul 21, 2025",
+                endDate: "Jul 25, 2025",
+                session: "Session 2",
+                days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                grade: "TK-2",
+                subject: "Imagination Station",
+                image: "community-heroes.jpg",
+                descTitle: "Community Heroes",
+                description: "Kids jump into action as firefighters, EMTs and other community heroes. They'll race through obstacle courses, design gear, and tackle daring missions. Every challenge brings their hero dreams to life!",
+                galleryImages: ["community-heroes-detail-1.jpg"]
+            },
+            {
+                id: 5,
+                title: "Video Game Design - Arcade Architects",
+                startDate: "Jul 21, 2025",
+                endDate: "Jul 25, 2025",
+                session: "Session 2",
+                days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                grade: "3-8",
+                subject: "Video Game Design",
+                image: "video-game-design-2.jpg",
+                descTitle: "Arcade Architects",
+                description: "Get ready to unleash your creativity! This summer, students will use Bloxels to design their very own indie game and launch a game studio. After bringing their ideas to life, we'll turn up the fun with an arcade-style showcase where everyone gets to play and experience each other's games!",
+                galleryImages: ["video-game-detail-1.jpg", "video-game-detail-2.jpg"]
+            },
+            {
+                id: 6,
+                title: "Dance - Lyrical & Contemporary",
+                startDate: "Jul 21, 2025",
+                endDate: "Jul 25, 2025",
+                session: "Session 2",
+                days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                grade: "3-5",
+                subject: "Dance",
+                image: "dance-lyrical.jpg",
+                descTitle: "Shine on and off the stage",
+                description: "Our dance program isn't just about teaching steps—it's about giving students the tools to express themselves confidently, connect with others, and thrive in every aspect of their lives.",
+                galleryImages: ["dance-detail-1.jpg", "dance-detail-2.jpg"]
+            },
+            {
+                id: 7,
+                title: "Imagination Station - Building Buddies",
+                startDate: "Jul 28, 2025",
+                endDate: "Aug 1, 2025",
+                session: "Session 3",
+                days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                grade: "TK-2",
+                subject: "Imagination Station",
+                image: "building-buddies.jpg",
+                descTitle: "Building Buddies",
+                description: "Children unleash their creativity as they design, build, and problem solve in hands-on construction challenges. From skyscrapers to hideouts, this immersive experience fosters design skills, teamwork, and big imagination!",
+                galleryImages: ["building-buddies-detail-1.jpg"]
+            },
+            {
+                id: 8,
+                title: "Video Game Design - Arcade Architects",
+                startDate: "Jul 28, 2025",
+                endDate: "Aug 1, 2025",
+                session: "Session 3",
+                days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                grade: "3-8",
+                subject: "Video Game Design",
+                image: "video-game-detail-1.jpg",
+                descTitle: "Arcade Architects",
+                description: "Get ready to unleash your creativity! This summer, students will use Bloxels to design their very own indie game and launch a game studio. After bringing their ideas to life, we'll turn up the fun with an arcade-style showcase where everyone gets to play and experience each other's games!",
+                galleryImages: ["video-game-design-2.jpg", "video-game-detail-2.jpg"]
+            },
+            {
+                id: 9,
+                title: "Dance - Polynesian & Salsa",
+                startDate: "Jul 28, 2025",
+                endDate: "Aug 1, 2025",
+                session: "Session 3",
+                days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                grade: "3-5",
+                subject: "Dance",
+                image: "dance-polynesian.jpg",
+                descTitle: "Shine on and off the stage",
+                description: "Our dance program isn't just about teaching steps—it's about giving students the tools to express themselves confidently, connect with others, and thrive in every aspect of their lives.",
+                galleryImages: ["dance-detail-1.jpg", "dance-detail-2.jpg"]
+            }
+        ];
+
+        // Current filters
+        let filters = {
+            session: 'all',
+            grade: 'all',
+            subject: 'all',
+            search: ''
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPrograms();
+            populateModalProgramList();
+        });
+
+        // Render program cards
+        function renderPrograms() {
+            const programsGrid = document.getElementById('programs-grid');
+            programsGrid.innerHTML = '';
+
+            const filteredPrograms = filterProgramsByCurrentFilters();
+
+            filteredPrograms.forEach(program => {
+                const programCard = document.createElement('div');
+                programCard.className = 'program-card';
+                programCard.onclick = () => openProgramModal(program.id);
+
+                programCard.innerHTML = `
+                    <img src="${program.image}" alt="${program.title}" class="program-img">
+                    <div class="program-info">
+                        <h3>${program.title}</h3>
+                        <div class="program-date">${program.startDate} - ${program.endDate}</div>
+                        <div class="days-list">
+                            ${program.days.map(day => `<span class="day-badge">${day}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+
+                programsGrid.appendChild(programCard);
+            });
+        }
+
+        // Filter programs based on current filters
+        function filterProgramsByCurrentFilters() {
+            return programs.filter(program => {
+                // Check session filter
+                if (filters.session !== 'all' && program.session !== filters.session) {
+                    return false;
+                }
+
+                // Check grade filter
+                if (filters.grade !== 'all' && program.grade !== filters.grade) {
+                    return false;
+                }
+
+                // Check subject filter
+                if (filters.subject !== 'all' && !program.subject.includes(filters.subject)) {
+                    return false;
+                }
+
+                // Check search filter
+                if (filters.search !== '' && !program.title.toLowerCase().includes(filters.search.toLowerCase())) {
+                    return false;
+                }
+
+                return true;
+            });
+        }
+
+        // Toggle dropdown visibility
+        function toggleDropdown(dropdownId) {
+            document.querySelectorAll('.dropdown-content').forEach(dropdown => {
+                if (dropdown.id !== dropdownId) {
+                    dropdown.classList.remove('show');
+                }
+            });
+            
+            document.getElementById(dropdownId).classList.toggle('show');
+        }
+
+        // Handle click outside to close dropdown
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-btn')) {
+                const dropdowns = document.getElementsByClassName('dropdown-content');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    if (dropdowns[i].classList.contains('show')) {
+                        dropdowns[i].classList.remove('show');
+                    }
+                }
+            }
+        };
+
+        // Apply filter and update display
+        function applyFilter(filterType, value) {
+            filters[filterType] = value;
+            renderPrograms();
+
+            // Update dropdown button text
+            const dropdownId = `${filterType}-dropdown`;
+            const dropdownBtn = document.querySelector(`#${dropdownId}`).previousElementSibling;
+            
+            if (value === 'all') {
+                const capitalizedType = filterType.charAt(0).toUpperCase() + filterType.slice(1);
+                dropdownBtn.textContent = `${capitalizedType}`;
+            } else {
+                dropdownBtn.textContent = `${value}`;
+            }
+
+            // Close the dropdown
+            document.getElementById(dropdownId).classList.remove('show');
+        }
+
+        // Filter programs by search input
+        function filterPrograms() {
+            const searchInput = document.getElementById('search-input').value;
+            const mobileSearchInput = document.getElementById('mobile-search-input').value;
+            filters.search = searchInput || mobileSearchInput;
+            renderPrograms();
+        }
+
+        // Open program modal
+        function openProgramModal(programId) {
+            const program = programs.find(p => p.id === programId);
+            if (!program) return;
+
+            // Highlight the program in the sidebar
+            const listItems = document.querySelectorAll('.program-list-item');
+            listItems.forEach(item => {
+                item.classList.remove('active');
+                if (parseInt(item.dataset.id) === programId) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Load program details
+            document.getElementById('program-detail').innerHTML = `
+                <div class="program-header">
+                    <img src="logo.png" alt="WorkED Logo" class="program-header-logo">
+                    <div class="program-header-title">
+                        <h2>${program.title}</h2>
+                    </div>
+                </div>
+                
+                <div class="program-info-grid">
+                    <div class="info-group">
+                        <div class="info-label">Start & End Date</div>
+                        <div class="info-value">${program.startDate} - ${program.endDate}</div>
+                    </div>
+                    
+                    <div class="info-group">
+                        <div class="info-label">Grade</div>
+                        <div class="info-value">${program.grade}</div>
+                    </div>
+                    
+                    <div class="info-group">
+                        <div class="info-label">Days</div>
+                        <div class="info-value">Mon, Tue, Wed, Thur, Fri</div>
+                    </div>
+                </div>
+                
+                <h3 class="program-subtitle">${program.descTitle}</h3>
+                <p class="program-description">${program.description}</p>
+                
+                <div class="image-gallery">
+                    ${program.galleryImages.map(img => `<img src="${img}" alt="${program.title}" class="gallery-image">`).join('')}
+                </div>
+            `;
+
+            // Show the modal
+            document.getElementById('program-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close program modal
+        function closeModal() {
+            document.getElementById('program-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Populate the program list in the modal
+        function populateModalProgramList() {
+            const programList = document.getElementById('modal-program-list');
+            programList.innerHTML = '';
+            
+            programs.forEach(program => {
+                const listItem = document.createElement('div');
+                listItem.className = 'program-list-item';
+                listItem.dataset.id = program.id;
+                listItem.onclick = () => openProgramModal(program.id);
+                
+                listItem.innerHTML = `
+                    <div class="program-list-info">
+                        <h4>${program.title}</h4>
+                    </div>
+                `;
+                
+                programList.appendChild(listItem);
+            });
+        }
+
+        // Open registration form
+        function openRegistrationForm() {
+            // Replace this URL with your actual Google Form link
+            window.open('https://forms.gle/jtS3drpGD4HmdqhYA', '_blank');
+        }
+
+        // Handle escape key to close modals
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('program-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
